@@ -3,6 +3,86 @@ title: "Activity 2 - Day 1"
 output: github_document
 ---
 
-```{setup, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+
+### Loading the packages 
+```{r}
+
+library(tidyverse)
+library(tidymodels)
+```
+
+
+### Task3: Load the data 
+```{r}
+hfi <- readr::read_csv("https://www.openintro.org/data/csv/hfi.csv")
+hfi
+
+```
+
+1. what are the dimensions of the data set what does each row represent? 
+Ans. There are 1458 rows and 123 columns,it represents the Human Freedom Index 
+
+
+## Filtering out the year 2016 from the dataset
+```{r}
+
+hfi_2016 <- hfi %>% filter(year == 2016) # using hfi_2016 as new object to store the values of the year 2016 from the original file
+hfi_2016
+
+```
+
+
+## Linear Model for Prediction
+```{r}
+pf_model <- lm(pf_score ~ pf_expression_control, data = hfi_2016)
+pf_model
+```
+
+
+```{r}
+
+ggplot(hfi_2016, aes(x = pf_expression_control, y = pf_score)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)+
+geom_point() + 
+  labs(title = " Public Freedom - 2016 ",
+              x = "Expression Control", y = " Scores" )
+
+```
+
+
+Q. Does the relationship looks linear? 
+Ans. Yes, the linear predictor line looks strongly linear and would definitely be able to use this model to predict the personal freedom scores. 
+
+
+### Task 4 
+
+The smallest number that I ever got was 271.362, and my best one yet is 307.98. My neighbors have somewhat similar results. 
+
+
+### Taks 5 
+
+```{r}
+ m1 <- lm(pf_score ~ pf_expression_control, data = hfi_2016)
+tidy(m1)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
