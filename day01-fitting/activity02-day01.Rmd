@@ -72,12 +72,63 @@ tidy(m1)
 ```
 
 
+### Activity 2 - Day 2 
+
+```{r}
+a <- cor(hfi_2016$pf_expression_control, hfi_2016$pf_score)
+
+```
+
+The correlation coefficient between pf_expression_control and pf_Score is `r a`. This means that both are highly correlated. 
 
 
+```{r}
+glance(m1)
+```
+
+The Value of R-squared in the model is 0.714, which means that 71.4 percent of the variation can be explained by the model. 
+
+```{r}
+pf_m <- lm(hf_score ~ pf_expression_control, data = hfi_2016)
+pf_m
+```
+
+```{r}
+ggplot(hfi_2016, aes(x = pf_expression_control, y = hf_score)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)+
+geom_point() + 
+  labs(title = " Public Freedom - 2016 ",
+              x = "Expression Control", y = " Hf - Scores" )
+```
+
+The slope is linear, which means both the values have a high correlation coefficient, therefore the linear equation for the model will be: hf_score = 5.0534 + 0.3684 * pf_expression_control. 
+
+Higher the pf_expression_control value, higher would be the the hf_score, I believe it is an overestimate because the residuals value are positive. 
+
+```{r}
+m1_aug <- augment(m1)
+m1_aug
+```
 
 
+```{r}
+ggplot(data = m1_aug, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  xlab("Fitted values") +
+  ylab("Residuals")
+```
 
+The points appear to be random and not in a pattern in the residuals plot. The distributions are symmetric, however, there are outliers (2). 
 
+```{r}
+ggplot(data = m1_aug, aes(x = .resid)) +
+  geom_histogram(binwidth = 0.25) +
+  xlab("Residuals")
+```
+
+Looking at the histogram, I believe that the model is a bit skewed towards the left, this also means the residuals are not linearly separated and most of the residuals are negative. 
 
 
 
