@@ -102,7 +102,7 @@ geom_point() +
               x = "Expression Control", y = " Hf - Scores" )
 ```
 
-The slope is linear, which means both the values have a high correlation coefficient, therefore the linear equation for the model will be: hf_score = 5.0534 + 0.3684 * pf_expression_control. 
+The slope is linear, which means both the values have a high correlation coefficient, therefore the linear equation for the model will be: hf_score = 5.0534 + 0.3684 * pf_expression_control. According to the equation, if the pf_expression_control is said to be 3, then if I go by the equation, the hf_score will be 6.15, which is a good score. 
 
 Higher the pf_expression_control value, higher would be the the hf_score, I believe it is an overestimate because the residuals value are positive. 
 
@@ -129,11 +129,4 @@ ggplot(data = m1_aug, aes(x = .resid)) +
 ```
 
 Looking at the histogram, I believe that the model is a bit skewed towards the left, this also means the residuals are not linearly separated and most of the residuals are negative. 
-
-
-
-
-
-
-
 
